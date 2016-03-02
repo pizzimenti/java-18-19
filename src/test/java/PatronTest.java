@@ -18,4 +18,11 @@ public class PatronTest {
     assertTrue(newPatron.equals(anotherPatron));
   }
 
+  @Test
+  public void save_returnTrueIfNamesAreSame() {
+    Patron newPatron = new Patron("Joe Patron");
+    newPatron.save();
+    Patron savedPatron = Patron.all().get(0);
+    assertEquals(newPatron.getId(), savedPatron.getId());
+  }
 }

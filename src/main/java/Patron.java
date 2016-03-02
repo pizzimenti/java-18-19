@@ -25,6 +25,17 @@ public class Patron {
     }
   }
 
+  public void save() {
+    String sql = "INSERT INTO patrons (patron_name, id) VALUES (:patron_name, :id)";
+    try(Connection con = DB.sql2o.open()) {
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("patron_name", patron_name)
+        .addParameter("id", id)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
   @Override
   public boolean equals(Object otherPatron) {
     if (!(otherPatron instanceof Patron)) {

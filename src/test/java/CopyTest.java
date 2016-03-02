@@ -18,4 +18,12 @@ public class CopyTest {
     assertTrue(newCopy.equals(anotherCopy));
   }
 
+  @Test
+  public void save_returnTrueIfNamesAreSame() {
+    Copy newCopy = new Copy();
+    newCopy.save();
+    Copy savedCopy = Copy.all().get(0);
+    assertEquals(newCopy.getId(), savedCopy.getId());
+  }
+
 }

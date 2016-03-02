@@ -46,6 +46,21 @@ public class Copy {
     }
   }
 
+  public void save() {
+    String sql = "INSERT INTO copies (id, checkout_date, due_date, id_books, id_patrons, date_received) VALUES (:id, :checkout_date, :due_date, :id_books, :id_patrons, :date_received)";
+    try(Connection con = DB.sql2o.open()) {
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("id", id)
+        .addParameter("checkout_date", checkout_date)
+        .addParameter("due_date", due_date)
+        .addParameter("id_books", id_books)
+        .addParameter("id_patrons", id_patrons)
+        .addParameter("date_received", date_received)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
   @Override
   public boolean equals(Object otherCopy) {
     if (!(otherCopy instanceof Copy)) {

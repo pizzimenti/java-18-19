@@ -18,4 +18,11 @@ public class BookTest {
     assertTrue(newBook.equals(anotherBook));
   }
 
+  @Test
+  public void save_returnTrueIfNamesAreSame() {
+    Book newBook = new Book("Harry Potter");
+    newBook.save();
+    Book savedBook = Book.all().get(0);
+    assertEquals(newBook.getId(), savedBook.getId());
+  }
 }

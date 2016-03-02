@@ -18,4 +18,11 @@ public class AuthorTest {
     assertTrue(newAuthor.equals(anotherAuthor));
   }
 
+  @Test
+  public void save_returnTrueIfNamesAreSame() {
+    Author newAuthor = new Author("JK Rowling");
+    newAuthor.save();
+    Author savedAuthor = Author.all().get(0);
+    assertEquals(newAuthor.getId(), savedAuthor.getId());
+  }
 }

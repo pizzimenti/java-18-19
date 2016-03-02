@@ -24,6 +24,18 @@ public class Author {
       return con.createQuery(sql).executeAndFetch(Author.class);
     }
   }
+
+  public void save() {
+    String sql = "INSERT INTO authors (author_name, id) VALUES (:author_name, :id)";
+    try(Connection con = DB.sql2o.open()) {
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("author_name", author_name)
+        .addParameter("id", id)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
   @Override
   public boolean equals(Object otherAuthor) {
     if (!(otherAuthor instanceof Author)) {
