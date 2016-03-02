@@ -10,4 +10,12 @@ public class CopyTest {
   public void all_emptyAtFirst() {
     assertEquals(0, Copy.all().size());
   }
+
+  @Test
+  public void equals_returnsTrueIfNamesAretheSame() {
+    Copy newCopy = new Copy();
+    Copy anotherCopy = new Copy();
+    assertTrue(newCopy.equals(anotherCopy));
+  }
+
 }

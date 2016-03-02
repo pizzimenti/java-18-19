@@ -24,5 +24,14 @@ public class Author {
       return con.createQuery(sql).executeAndFetch(Author.class);
     }
   }
-
+  @Override
+  public boolean equals(Object otherAuthor) {
+    if (!(otherAuthor instanceof Author)) {
+      return false;
+    } else {
+      Author newAuthor = (Author) otherAuthor;
+      return this.getName().equals(newAuthor.getName()) &&
+             this.getId() == newAuthor.getId();
+    }
+  }
 }

@@ -9,9 +9,10 @@ public class Copy {
   private Date due_date;
   private int id_books;
   private int id_patrons;
+  private Date date_received;
 
   public Copy() {
-
+    this.date_received = new Date();
   }
 
   public int getId() {
@@ -31,7 +32,11 @@ public class Copy {
   }
 
   public int getPatronId() {
-    return id_patrons
+    return id_patrons;
+  }
+
+  public Date getDateReceived() {
+    return date_received;
   }
 
   public static List<Copy> all() {
@@ -41,4 +46,18 @@ public class Copy {
     }
   }
 
+  @Override
+  public boolean equals(Object otherCopy) {
+    if (!(otherCopy instanceof Copy)) {
+      return false;
+    } else {
+      Copy newCopy = (Copy) otherCopy;
+      return this.getId() == newCopy.getId() &&
+             this.getDateReceived().equals(newCopy.getDateReceived());
+             //FAIL ASSERT FOR UNKNOWN REASON
+            //  this.getCheckoutDate().equals(newCopy.getCheckoutDate()) &&
+            //  this.getDueDate().equals(newCopy.getDueDate());
+
+    }
+  }
 }

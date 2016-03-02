@@ -10,4 +10,12 @@ public class BookTest {
   public void all_emptyAtFirst() {
     assertEquals(0, Book.all().size());
   }
+
+  @Test
+  public void equals_returnsTrueIfNamesAretheSame() {
+    Book newBook = new Book("Harry Potter");
+    Book anotherBook = new Book("Harry Potter");
+    assertTrue(newBook.equals(anotherBook));
+  }
+
 }

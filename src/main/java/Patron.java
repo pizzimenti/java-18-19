@@ -25,4 +25,15 @@ public class Patron {
     }
   }
 
+  @Override
+  public boolean equals(Object otherPatron) {
+    if (!(otherPatron instanceof Patron)) {
+      return false;
+    } else {
+      Patron newPatron = (Patron) otherPatron;
+      return this.getName().equals(newPatron.getName()) &&
+             this.getId() == newPatron.getId();
+    }
+  }
+
 }

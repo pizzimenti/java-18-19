@@ -25,4 +25,15 @@ public class Book {
     }
   }
 
+  @Override
+  public boolean equals(Object otherBook) {
+    if (!(otherBook instanceof Book)) {
+      return false;
+    } else {
+      Book newBook = (Book) otherBook;
+      return this.getBookTitle().equals(newBook.getBookTitle()) &&
+             this.getId() == newBook.getId();
+    }
+  }
+
 }
