@@ -62,17 +62,18 @@ public class AuthorTest {
     myAuthor.addBook(myBook);
     myAuthor.addBook(myBookTwo);
     List savedBooks = myAuthor.getBooks();
-    assertEquals(savedBooks.size(), 2);
+    assertEquals(2, savedBooks.size());
   }
+
+
+    @Test
+    public void deleteBooks_DeletesAllBooksFromAuthor() {
+      Author myAuthor = new Author("JK Rowling");
+      myAuthor.save();
+      Book myBook = new Book("Clean the litter box");
+      myBook.save();
+      myAuthor.addBook(myBook);
+      myAuthor.deleteBooks();
+      assertEquals(0, myBook.getAuthors().size());
+    }
 }
-    //
-    // @Test
-    // public void deleteBooks_DeletesAllBooksFromAuthor() {
-    //   Author myAuthor = new Author("JK Rowling");
-    //   myAuthor.save();
-    //   Book myBook = new Book("Clean the litter box");
-    //   myBook.save();
-    //   myAuthor.addBook(myBook);
-    //   myAuthor.deleteBooks();
-    //   assertEquals(myBook.getCategories().size(), 0);
-    // }

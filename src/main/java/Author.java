@@ -68,6 +68,20 @@ public class Author {
     }
   }
 
+  public void deleteBooks() {
+    String sql = "DELETE FROM authors WHERE id=:id;";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+
+    String sqlJoin = "DELETE FROM books_authors WHERE id_authors=:id_authors;";
+      con.createQuery(sqlJoin)
+      .addParameter("id_authors", this.getId())
+      .executeUpdate();
+    }
+  }
+
   @Override
   public boolean equals(Object otherAuthor) {
     if (!(otherAuthor instanceof Author)) {

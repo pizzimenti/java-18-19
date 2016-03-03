@@ -68,6 +68,16 @@ public class Book {
     }
   }
 
+  public void deleteAuthors() {
+    String sql = "DELETE FROM books WHERE id=:id;" + "DELETE FROM books_authors WHERE id_authors=:id_authors;";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("id", id)
+      .addParameter("id_authors", this.getId())
+      .executeUpdate();
+  }
+}
+
   @Override
   public boolean equals(Object otherBook) {
     if (!(otherBook instanceof Book)) {

@@ -62,4 +62,14 @@ public class BookTest {
     assertEquals(savedAuthors.size(), 2);
   }
 
+  @Test
+  public void deleteAuthors_DeleteAllAuthorsFromBook() {
+    Author myAuthor = new Author("JK Rowling");
+    myAuthor.save();
+    Book myBook = new Book("Clean the litter box");
+    myBook.save();
+    myBook.addAuthor(myAuthor);
+    myBook.deleteAuthors();
+    assertEquals(0, myAuthor.getBooks().size());
+  }
 }
