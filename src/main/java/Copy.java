@@ -49,10 +49,9 @@ public class Copy {
   }
 
   public void save() {
-    String sql = "INSERT INTO copies (id, checkout_date, due_date, id_books, id_patrons, date_received) VALUES (:id, :checkout_date, :due_date, :id_books, :id_patrons, :date_received)";
+    String sql = "INSERT INTO copies (checkout_date, due_date, id_books, id_patrons, date_received) VALUES (:checkout_date, :due_date, :id_books, :id_patrons, :date_received)";
     try(Connection con = DB.sql2o.open()) {
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("id", id)
         .addParameter("checkout_date", checkout_date)
         .addParameter("due_date", due_date)
         .addParameter("id_books", id_books)
@@ -79,7 +78,7 @@ public class Copy {
       return false;
     } else {
       Copy newCopy = (Copy) otherCopy;
-      return this.getId() == newCopy.getId(); 
+      return this.getId() == newCopy.getId();
             //  this.getDateReceived().equals(newCopy.getDateReceived());
           //  this.getCheckoutDate().equals(newCopy.getCheckoutDate()) &&
           //  this.getDueDate().equals(newCopy.getDueDate());

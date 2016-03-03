@@ -26,11 +26,10 @@ public class Author {
   }
 
   public void save() {
-    String sql = "INSERT INTO authors (author_name, id) VALUES (:author_name, :id)";
+    String sql = "INSERT INTO authors (author_name) VALUES (:author_name)";
     try(Connection con = DB.sql2o.open()) {
       this.id = (int) con.createQuery(sql, true)
         .addParameter("author_name", author_name)
-        .addParameter("id", id)
         .executeUpdate()
         .getKey();
     }
@@ -45,6 +44,29 @@ public class Author {
     }
   }
 
+  public void addBook(Book book) {
+    String sql = "INSERT INTO books_authors (id_books, id_authors) VALUES (:id_books, :id_authors);";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("id_books", book.getId())
+      .addParameter("id_authors", this.getId())
+      .executeUpdate();
+    }
+  }
+
+  public List<Book> getBooks() {
+    String sql = "SELECT books.* FROM authors " +
+                "JOIN books_authors ON (authors.id = books_authors.id_authors) " +
+                "JOIN books ON (books_authors.id_books = books.id) " +
+                "WHERE authors.id =:id_authors";
+    try (Connection con = DB.sql2o.open()) {
+    List<Book> bookList = con.createQuery(sql)
+        .addParameter("id_authors", this.getId())
+        .executeAndFetch(Book.class);
+      return bookList;
+
+    }
+  }
 
   @Override
   public boolean equals(Object otherAuthor) {

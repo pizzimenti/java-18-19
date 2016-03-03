@@ -26,11 +26,10 @@ public class Book {
   }
 
   public void save() {
-    String sql = "INSERT INTO books (book_title, id) VALUES (:book_title, :id)";
+    String sql = "INSERT INTO books (book_title) VALUES (:book_title)";
     try(Connection con = DB.sql2o.open()) {
       this.id = (int) con.createQuery(sql, true)
         .addParameter("book_title", book_title)
-        .addParameter("id", id)
         .executeUpdate()
         .getKey();
     }

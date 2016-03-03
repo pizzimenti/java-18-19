@@ -26,11 +26,10 @@ public class Patron {
   }
 
   public void save() {
-    String sql = "INSERT INTO patrons (patron_name, id) VALUES (:patron_name, :id)";
+    String sql = "INSERT INTO patrons (patron_name) VALUES (:patron_name)";
     try(Connection con = DB.sql2o.open()) {
       this.id = (int) con.createQuery(sql, true)
         .addParameter("patron_name", patron_name)
-        .addParameter("id", id)
         .executeUpdate()
         .getKey();
     }
