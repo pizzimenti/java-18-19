@@ -1,0 +1,14 @@
+<h2>Add an Author</h2>
+
+<form action="/add-author" method="post">
+  <div class="form-group">
+    <input required placeholder="Author Name" type="text" class="form-control" name="author" id="author">
+  </div>
+  <button type="submit" id="submit-author" class="btn btn-info">Submit Author</button>
+</form>
+  <h4>Authors in Database:</h4>
+  <ul>
+    #foreach($author in $authors)
+      <li>$author.getName()</li>
+    #end
+  </ul>

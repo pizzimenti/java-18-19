@@ -30,6 +30,26 @@ public class App {
       return new ModelAndView (model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/add-author", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("books", Book.all());
+      model.put("authors", Author.all());
+      model.put("template", "templates/add-author.vtl");
+      return new ModelAndView (model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/add-author", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      String authorName = request.queryParams("author");
+      String authorNumber = request.queryParams("authorNumber");
+      Author newAuthor = new Author(authorName);
+      newAuthor.save();
+
+      response.redirect("/add-author");
+      return null;
+    });
+
     // get("/book/:id", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
     //   model.put("books", Book.all());
@@ -43,24 +63,5 @@ public class App {
     //   return new ModelAndView (model, layout);
     // }, new VelocityTemplateEngine());
     //
-    // get("/add-author", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   model.put("books", Book.all());
-    //   model.put("authors", Author.all());
-    //   model.put("template", "templates/add-author.vtl");
-    //   return new ModelAndView (model, layout);
-    // }, new VelocityTemplateEngine());
-    //
-    // post("/add-author", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //
-    //   String authorName = request.queryParams("author");
-    //   String authorNumber = request.queryParams("authorNumber");
-    //   Author newAuthor = new Author(authorName, authorNumber);
-    //   newAuthor.save();
-    //
-    //   response.redirect("/add-author");
-    //   return null;
-    // });
   } //end of main
 } //end of app

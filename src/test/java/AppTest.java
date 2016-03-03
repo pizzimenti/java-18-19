@@ -22,11 +22,14 @@ public class AppTest extends FluentTest {
       goTo("http://localhost:4567/");
       assertThat(pageSource()).contains("Library Catalog");
   }
-  // @Test
-  // public void isALeapYear() {
-  //   goTo("http://localhost:4567");
-  //   fill("#year").with("2004");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("Correct response");
-  // }
+
+  @Test
+  public void addAuthor_addsAuthorToDatabase() {
+    goTo("http://localhost:4567/");
+    click("#add-author");
+    fill("author").with("John Steinbeck");
+    submit("#author-submit");
+    assertThat(pageSource()).contains("John Steinbeck");
+  }
+
 } // end IntegrationTest
