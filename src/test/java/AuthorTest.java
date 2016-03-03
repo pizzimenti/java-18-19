@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 public class AuthorTest {
-  
+
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
@@ -27,43 +27,44 @@ public class AuthorTest {
     Author savedAuthor = Author.all().get(0);
     assertEquals(newAuthor.getId(), savedAuthor.getId());
   }
-}
 
-  // @Test
-  // public void find_findsObjectInDatabaseById() {
-  //   Author newAuthor = new Author("JK Rowling");
-  //   newAuthor.save();
-  //   Author savedAuthor = Author.find(newAuthor.getId());
-  //   assertEquals(newAuthor.getId(), savedAuthor.getId());
-  // }
-  //
-  //
-  //   @Test
-  //   public void addBook_addsBookToAuthor() {
-  //     Author myAuthor = new Author("JK Rowling");
-  //     myAuthor.save();
-  //     Book myBook = new Book("Clean the litter box");
-  //     myBook.save();
-  //     myAuthor.addBook(myBook);
-  //     Book savedBook = myAuthor.getBooks().get(0);
-  //     assertTrue(myBook.equals(savedBook));
-  //   }
-  //
-  //   @Test
-  //   public void getBooks_getsBooksFromAuthor() {
-  //     Author myAuthor = new Author("JK Rowling");
-  //     myAuthor.save();
-  //     Author myAuthorTwo = new Author("JM Rowling");
-  //     myAuthorTwo.save();
-  //     Book myBook = new Book("Clean the litter box");
-  //     myBook.save();
-  //     Book myBookTwo = new Book("Clean the litter box");
-  //     myBookTwo.save();
-  //     myAuthor.addBook(myBook);
-  //     myAuthorTwo.addBook(myBookTwo);
-  //     List savedBooks = myAuthorTwo.getBooks();
-  //     assertEquals(savedBooks.size(), 1);
-    // }
+
+  @Test
+  public void find_findsObjectInDatabaseById() {
+    Author newAuthor = new Author("JK Rowling");
+    newAuthor.save();
+    Author savedAuthor = Author.find(newAuthor.getId());
+    assertEquals(newAuthor.getId(), savedAuthor.getId());
+  }
+
+
+  @Test
+  public void addBook_addsBookToAuthor() {
+    Author myAuthor = new Author("JK Rowling");
+    myAuthor.save();
+    Book myBook = new Book("Clean the litter box");
+    myBook.save();
+    myAuthor.addBook(myBook);
+    Book savedBook = myAuthor.getBooks().get(0);
+    assertTrue(myBook.equals(savedBook));
+  }
+
+  @Test
+  public void getBooks_getsBooksFromAuthor() {
+    Author myAuthor = new Author("JK Rowling");
+    myAuthor.save();
+    Author myAuthorTwo = new Author("JM Rowling");
+    myAuthorTwo.save();
+    Book myBook = new Book("Clean the litter box");
+    myBook.save();
+    Book myBookTwo = new Book("Clean the litter box");
+    myBookTwo.save();
+    myAuthor.addBook(myBook);
+    myAuthor.addBook(myBookTwo);
+    List savedBooks = myAuthor.getBooks();
+    assertEquals(savedBooks.size(), 2);
+  }
+}
     //
     // @Test
     // public void deleteBooks_DeletesAllBooksFromAuthor() {

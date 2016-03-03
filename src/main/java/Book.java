@@ -44,6 +44,30 @@ public class Book {
     }
   }
 
+  public void addAuthor(Author author) {
+    String sql = "INSERT INTO books_authors (id_books, id_authors) VALUES (:id_books, :id_authors);";
+    try (Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("id_books", this.getId())
+      .addParameter("id_authors", author.getId())
+      .executeUpdate();
+    }
+  }
+
+  public List<Author> getAuthors() {
+    String sql = "SELECT authors.* FROM books " +
+                "JOIN books_authors ON (books.id = books_authors.id_books) " +
+                "JOIN authors ON (books_authors.id_authors = authors.id) " +
+                "WHERE books.id =:id_books";
+    try (Connection con = DB.sql2o.open()) {
+    List<Author> authorList = con.createQuery(sql)
+        .addParameter("id_books", this.getId())
+        .executeAndFetch(Author.class);
+      return authorList;
+
+    }
+  }
+
   @Override
   public boolean equals(Object otherBook) {
     if (!(otherBook instanceof Book)) {
