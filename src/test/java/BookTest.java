@@ -25,4 +25,12 @@ public class BookTest {
     Book savedBook = Book.all().get(0);
     assertEquals(newBook.getId(), savedBook.getId());
   }
+
+  @Test
+  public void find_findsObjectInDatabaseById() {
+    Book newBook = new Book("Harry Potter");
+    newBook.save();
+    Book savedBook = Book.find(newBook.getId());
+    assertTrue(newBook.equals(savedBook));
+  }
 }

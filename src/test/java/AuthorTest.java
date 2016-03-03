@@ -25,4 +25,12 @@ public class AuthorTest {
     Author savedAuthor = Author.all().get(0);
     assertEquals(newAuthor.getId(), savedAuthor.getId());
   }
+
+  @Test
+  public void find_findsObjectInDatabaseById() {
+    Author newAuthor = new Author("JK Rowling");
+    newAuthor.save();
+    Author savedAuthor = Author.find(newAuthor.getId());
+    assertEquals(newAuthor.getId(), savedAuthor.getId());
+  }
 }

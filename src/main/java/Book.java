@@ -36,6 +36,15 @@ public class Book {
     }
   }
 
+  public static Book find(int id) {
+    String sql = "SELECT * FROM books WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id",id)
+        .executeAndFetchFirst(Book.class);
+    }
+  }
+
   @Override
   public boolean equals(Object otherBook) {
     if (!(otherBook instanceof Book)) {

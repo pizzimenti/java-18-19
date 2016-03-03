@@ -36,6 +36,15 @@ public class Patron {
     }
   }
 
+  public static Patron find(int id) {
+    String sql = "SELECT * FROM patrons WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id",id)
+        .executeAndFetchFirst(Patron.class);
+    }
+  }
+
   @Override
   public boolean equals(Object otherPatron) {
     if (!(otherPatron instanceof Patron)) {

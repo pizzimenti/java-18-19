@@ -25,4 +25,12 @@ public class PatronTest {
     Patron savedPatron = Patron.all().get(0);
     assertEquals(newPatron.getId(), savedPatron.getId());
   }
+
+  @Test
+  public void find_findsObjectInDatabaseById() {
+    Patron newPatron = new Patron("Joe Patron");
+    newPatron.save();
+    Patron savedPatron = Patron.find(newPatron.getId());
+    assertEquals(newPatron.getId(), savedPatron.getId());
+  }
 }

@@ -26,4 +26,11 @@ public class CopyTest {
     assertEquals(newCopy.getId(), savedCopy.getId());
   }
 
+  @Test
+  public void find_findsObjectInDatabaseById() {
+    Copy newCopy = new Copy();
+    newCopy.save();
+    Copy savedCopy = Copy.find(newCopy.getId());
+    assertEquals(newCopy, savedCopy);
+  }
 }

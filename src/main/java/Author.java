@@ -36,6 +36,16 @@ public class Author {
     }
   }
 
+  public static Author find(int id) {
+    String sql = "SELECT * FROM authors WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id",id)
+        .executeAndFetchFirst(Author.class);
+    }
+  }
+
+
   @Override
   public boolean equals(Object otherAuthor) {
     if (!(otherAuthor instanceof Author)) {
