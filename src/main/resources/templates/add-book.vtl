@@ -1,0 +1,20 @@
+<h2>Add a book:</h2>
+
+<form action="/add-book" method="post">
+  <div class="form-group">
+    <input required placeholder="New Book Name" type="text" class="form-control" name="book" id="book">
+  </div>
+  <select required id="author" name="author" class="form-control" type="text">
+        <option value="" disabled="disabled" selected="true">Choose an Author</option>
+      #foreach($author in $authors)
+        <option value="$author.getId()">$author.getName()</option>
+      #end
+  </select>
+  <button id="submit-book" type="submit" class="btn btn-info">Submit Book</button>
+</form>
+<h4>Books in Database:</h4>
+<ul>
+  #foreach($book in $books)
+    <li>$book.getBookTitle()</li>
+  #end
+</ul>

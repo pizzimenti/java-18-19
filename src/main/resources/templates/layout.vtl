@@ -32,7 +32,7 @@
           #end
           <ul>
             #foreach ($book in $books)
-            <a href="/book/$book.getId()"><li>$book.getName()</li></a>
+            <a href="/book/$book.getId()"><li>$book.getBookTitle()</li></a>
             #end
           </ul>
 

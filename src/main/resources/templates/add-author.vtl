@@ -6,6 +6,25 @@
   </div>
   <button type="submit" id="submit-author" class="btn btn-info">Submit Author</button>
 </form>
+
+<h2>Add Author to Book</h2>
+<form action="/add-author-to-book" method="post">
+  <select required id="author-existing" name="author-existing" class="form-control" type="text">
+        <option value="" disabled="disabled" selected="true">Choose an Author</option>
+      #foreach($author in $authors)
+      <option value="$author.getId()">$author.getName()</option>
+    #end
+  </select>
+  <select required id="book-existing" name="book-existing" class="form-control" type="text">
+    <option value="" disabled="disabled" selected="true">Choose a Book</option>
+    #foreach($book in $books)
+    <option value="$book.getId()">$book.getBookTitle()</option>
+    #end
+  </select>
+  <button type="submit" id="submit-author-to-book" class="btn btn-info">Submit as Author of Selected Book</button>
+</form>
+
+
   <h4>Authors in Database:</h4>
   <ul>
     #foreach($author in $authors)

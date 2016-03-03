@@ -44,12 +44,12 @@ public class Book {
     }
   }
 
-  public void addAuthor(Author author) {
+  public void addAuthor(int authorId) {
     String sql = "INSERT INTO books_authors (id_books, id_authors) VALUES (:id_books, :id_authors);";
     try (Connection con = DB.sql2o.open()) {
       con.createQuery(sql)
       .addParameter("id_books", this.getId())
-      .addParameter("id_authors", author.getId())
+      .addParameter("id_authors", authorId)
       .executeUpdate();
     }
   }
