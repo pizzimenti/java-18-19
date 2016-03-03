@@ -1,14 +1,50 @@
 <!doctype html>
 <html>
   <head>
-    <title></title>
+    <title>Library Catalog</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='/app.css'>
+    <link rel="stylesheet" href="/css/app.css" type="text/css">
   </head>
   <body>
-    <div class='container'>
+    <div class="container">
 
-      #parse($template)
+      <div class="pagehead">
+        <h1>Library Catalog</h1>
+      </div>
+
+      <div class="row">
+        <div id="left-col" class="col-md-6">
+          <h2>Books</h2>
+
+          <form action="/" method="post">
+            <div class="form-group">
+              <select id="author" name="author" class="form-control" type="text" onchange="this.form.submit();">
+                <option selected="true" disabled="disabled">Choose an Author</option>
+                #foreach($author in $authors)
+                <option value="$author.getId()">$author.getName()</option>
+                #end
+              </select>
+            </div>
+          </form>
+
+          #if($listAuthorName)
+          <h4>$listAuthorName</h4>
+          #end
+          <ul>
+            #foreach ($book in $books)
+            <a href="/book/$book.getId()"><li>$book.getName()</li></a>
+            #end
+          </ul>
+
+          ## Edit Database Control Panel
+          <a href="/new-book"><button class="btn btn-info">Add a Book</button></a>
+          <a href="/add-author"><button class="btn btn-info">Add an Author</button></a>
+        </div>
+        <div id="right-col" class="col-md-6">
+          #parse( $template )
+        </div>
+      </div>
+
 
     </div>
   </body>

@@ -45,7 +45,7 @@ public class AuthorTest {
     Book myBook = new Book("Clean the litter box");
     myBook.save();
     myAuthor.addBook(myBook);
-    Book savedBook = myAuthor.getBooks().get(0);
+    Book savedBook = myAuthor.getBooks(myAuthor.getId()).get(0);
     assertTrue(myBook.equals(savedBook));
   }
 
@@ -61,7 +61,7 @@ public class AuthorTest {
     myBookTwo.save();
     myAuthor.addBook(myBook);
     myAuthor.addBook(myBookTwo);
-    List savedBooks = myAuthor.getBooks();
+    List savedBooks = myAuthor.getBooks(myAuthor.getId());
     assertEquals(2, savedBooks.size());
   }
 

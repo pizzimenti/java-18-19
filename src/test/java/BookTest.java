@@ -70,6 +70,6 @@ public class BookTest {
     myBook.save();
     myBook.addAuthor(myAuthor);
     myBook.deleteAuthors();
-    assertEquals(0, myAuthor.getBooks().size());
+    assertEquals(0, myAuthor.getBooks(myAuthor.getId()).size());
   }
 }

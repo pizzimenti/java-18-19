@@ -75,8 +75,8 @@ public class Book {
       .addParameter("id", id)
       .addParameter("id_authors", this.getId())
       .executeUpdate();
+    }
   }
-}
 
   @Override
   public boolean equals(Object otherBook) {

@@ -54,14 +54,14 @@ public class Author {
     }
   }
 
-  public List<Book> getBooks() {
+  public static List<Book> getBooks(int id) {
     String sql = "SELECT books.* FROM authors " +
                 "JOIN books_authors ON (authors.id = books_authors.id_authors) " +
                 "JOIN books ON (books_authors.id_books = books.id) " +
                 "WHERE authors.id =:id_authors";
     try (Connection con = DB.sql2o.open()) {
     List<Book> bookList = con.createQuery(sql)
-        .addParameter("id_authors", this.getId())
+        .addParameter("id_authors", id)
         .executeAndFetch(Book.class);
       return bookList;
 
