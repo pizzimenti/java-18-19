@@ -27,8 +27,8 @@ public class AppTest extends FluentTest {
   public void addAuthor_addsAuthorToDatabase() {
     goTo("http://localhost:4567/");
     click("#add-author");
-    fill("author").with("John Steinbeck");
-    submit("#author-submit");
+    fill("#author-name").with("John Steinbeck");
+    submit("#submit-author");
     assertThat(pageSource()).contains("John Steinbeck");
   }
 

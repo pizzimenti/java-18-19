@@ -65,11 +65,9 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
 
       String authorName = request.queryParams("author");
-      int bookId = Integer.parseInt(request.queryParams("book"));
       Author newAuthor = new Author(authorName);
       newAuthor.save();
-      newAuthor.addBook(bookId);
-
+      
       response.redirect("/add-author");
       return null;
     });
