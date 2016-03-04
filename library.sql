@@ -239,6 +239,9 @@ ALTER TABLE ONLY patrons ALTER COLUMN id SET DEFAULT nextval('patrons_id_seq'::r
 --
 
 COPY authors (id, author_name) FROM stdin;
+394	Isaac Asimov
+395	George RR Martin
+396	Stephen King
 \.
 
 
@@ -246,7 +249,7 @@ COPY authors (id, author_name) FROM stdin;
 -- Name: authors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('authors_id_seq', 1, false);
+SELECT pg_catalog.setval('authors_id_seq', 396, true);
 
 
 --
@@ -254,6 +257,9 @@ SELECT pg_catalog.setval('authors_id_seq', 1, false);
 --
 
 COPY books (id, book_title) FROM stdin;
+372	I, Robot
+373	Game of Thrones
+374	The Stand
 \.
 
 
@@ -262,6 +268,10 @@ COPY books (id, book_title) FROM stdin;
 --
 
 COPY books_authors (id, id_books, id_authors) FROM stdin;
+304	372	394
+305	372	395
+306	373	395
+307	374	396
 \.
 
 
@@ -269,14 +279,14 @@ COPY books_authors (id, id_books, id_authors) FROM stdin;
 -- Name: books_authors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('books_authors_id_seq', 1, false);
+SELECT pg_catalog.setval('books_authors_id_seq', 307, true);
 
 
 --
 -- Name: books_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('books_id_seq', 1, false);
+SELECT pg_catalog.setval('books_id_seq', 374, true);
 
 
 --
@@ -291,7 +301,7 @@ COPY copies (id, id_books, checkout_date, due_date, id_patrons, date_received) F
 -- Name: copies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('copies_id_seq', 1, false);
+SELECT pg_catalog.setval('copies_id_seq', 242, true);
 
 
 --
@@ -306,7 +316,7 @@ COPY patrons (id, patron_name) FROM stdin;
 -- Name: patrons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('patrons_id_seq', 1, false);
+SELECT pg_catalog.setval('patrons_id_seq', 84, true);
 
 
 --
