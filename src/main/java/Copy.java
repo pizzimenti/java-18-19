@@ -11,8 +11,9 @@ public class Copy {
   private int id_patrons;
   private Date date_received;
 
-  public Copy() {
+  public Copy(int id_books) {
     this.date_received = new Date();
+    this.id_books = id_books;
     // this.checkout_date = new Date();
     // this.due_date = new Date();
   }
@@ -48,19 +49,33 @@ public class Copy {
     }
   }
 
-  public void save() {
-    String sql = "INSERT INTO copies (checkout_date, due_date, id_books, id_patrons, date_received) VALUES (:checkout_date, :due_date, :id_books, :id_patrons, :date_received)";
+  public void addInventory(int qty) {
+    String sql = "INSERT INTO copies (id_books, date_received) VALUES (:id_books, :date_received)";
     try(Connection con = DB.sql2o.open()) {
-      this.id = (int) con.createQuery(sql, true)
-        .addParameter("checkout_date", checkout_date)
-        .addParameter("due_date", due_date)
-        .addParameter("id_books", id_books)
-        .addParameter("id_patrons", id_patrons)
-        .addParameter("date_received", date_received)
-        .executeUpdate()
-        .getKey();
+      for(int i = 0; i < qty; i++) {
+        con.createQuery(sql)
+          .addParameter("id_books", id_books)
+          .addParameter("date_received", date_received)
+          .executeUpdate();
+      }
     }
   }
+
+
+  // OLD SAVE METHOD NEEDS UPDATE FOR MAKING IT UPDATE COPIES WITH PATRON ACCESS/CHECKOUT/ETC
+  // public void save() {
+  //   String sql = "INSERT INTO copies (checkout_date, due_date, id_books, id_patrons, date_received) VALUES (:checkout_date, :due_date, :id_books, :id_patrons, :date_received)";
+  //   try(Connection con = DB.sql2o.open()) {
+  //     this.id = (int) con.createQuery(sql, true)
+  //       .addParameter("checkout_date", checkout_date)
+  //       .addParameter("due_date", due_date)
+  //       .addParameter("id_books", id_books)
+  //       .addParameter("id_patrons", id_patrons)
+  //       .addParameter("date_received", date_received)
+  //       .executeUpdate()
+  //       .getKey();
+  //   }
+  // }
 
   public static Copy find(int id) {
     String sql = "SELECT * FROM copies WHERE id=:id";
@@ -78,11 +93,8 @@ public class Copy {
       return false;
     } else {
       Copy newCopy = (Copy) otherCopy;
-      return this.getId() == newCopy.getId();
-            //  this.getDateReceived().equals(newCopy.getDateReceived());
-          //  this.getCheckoutDate().equals(newCopy.getCheckoutDate()) &&
-          //  this.getDueDate().equals(newCopy.getDueDate());
-
+      return this.getId() == newCopy.getId() &&
+             this.getDateReceived().toString().equals(newCopy.getDateReceived().toString());
     }
   }
 }

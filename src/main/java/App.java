@@ -67,7 +67,7 @@ public class App {
       String authorName = request.queryParams("author");
       Author newAuthor = new Author(authorName);
       newAuthor.save();
-      
+
       response.redirect("/add-author");
       return null;
     });
@@ -84,6 +84,13 @@ public class App {
       response.redirect("/add-author");
       return null;
     });
+ 
+    // get("/add-inventory")
+    //
+    // int bookId = Integer.parseInt(request.queryParams("book-existing"));
+    //   Copy newCopy = new Copy(int bookId);
+    //   int qty = 25;
+    //   newCopy.addInventory(qty);
 
     // get("/book/:id", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
